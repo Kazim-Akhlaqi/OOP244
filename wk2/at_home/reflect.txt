@@ -1,0 +1,48 @@
+/***********************************************************
+// Workshop 2: Dynamic Memory
+// File reflect.txt
+// Date May/24/2018
+// Student: Kazim Akhlaqi
+// Student_ID: 103638177
+// Section: OOP244 SAB
+***********************************************************/
+
+1) Why do you need to allocate new dynamic memory when you increase the size of an existing
+array of dynamically allocated memory?
+Since the first array is constant, we cant increase its size, so We need to allocate
+new dynamic memory to save temporarily the data stored in the first array, and then
+deallocate the space occupied by first array and then copy the new array data to the
+first array which will increase its size.
+
+2) The Kingdom structure stores the name of the kingdom in an array of char-acters.
+At the end of the program, we do not use the delete operator to deallocate the memory
+occupied by the name. Why don’t we need to use the delete operator on this array itself? Explain.
+We dont need to free the memory allocated by the name property in structure Kingdom
+because when we deallocate the memory occupied by the array kingdom all the memory
+taken by its member will become available back to the program.
+
+3) There are two display(...) function definitions.
+How does the compiler know which definition to call from your main function? 
+The compiler distinguishes the difference bettween two fuctions by the
+difference in the functions's parameters.
+
+4) Explain what have you have learned in this workshop.
+I have learnt how to allocate and deallocate and resize dynamic memory of
+an array of elements and how to overload a global function.
+
+
+Quiz 2 Reflection:
+
+Question 1.
+
+Module #2: main_app.cpp
+
+#include <iostream>
+#include "hello.h"
+using namespace std;
+using namespace sict;
+
+Question 2.
+
+g++ hello.cpp main_app.cpp -Wall std=c++0x 
+

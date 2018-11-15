@@ -1,0 +1,26 @@
+/**********************************************************
+// OOP244 Workshop 8: Virtual Functions and Abstract Base Classes
+// File: reflect.txt
+// Version: at_home
+// Date July/22/2018
+// Student: Kazim Akhlaqi
+// Student_ID: 103638177
+// Student_Email: kakhlaqi@myseneca.ca
+// Section: OOP244 SAB
+// Description:
+***********************************************************/
+1. What is the difference between an abstract base class and a concrete class?
+An abstract class is a base class that contains or inherits a pure virtual function
+and it defines an interface, while a concrete class is a derived class that
+implements that interface.
+
+2. Identify the functions that shadow functions of the same name in your solution?
+ChequingAccount::display() shadows SavingsAccount::display()
+ChequingAccount::monthEnd() shadows SavingsAccount::monthEnd()
+ChequingAccount::debit() shadows Account::debit().
+ChequingAccount::credit() shadows Account::credit()
+
+3. Explain what have you learned in this workshop.
+I learn how to derive a class from a base class and also 
+I learnt how to define and use a pure virtual function.
+

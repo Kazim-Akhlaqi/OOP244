@@ -1,0 +1,31 @@
+Student Full_Name: Kazim Akhlaqi
+Student_ID: 103638177
+Stdent Email: kakhlaqi@myseneca.ca
+Section: OOP244-SAB
+Assignment: Workshop 1 - at_home - reflect.txt
+-------------------
+
+1. What is a namespace? Explain its purpose.
+In cpp programing namespace is refered to a set of symbols that are used to organize code into various group entities like classes, objects and functions under a name.
+this way Symbols declared inside a namespace block are placed in a named scope that prevents them from being mistaken for identically-named symbols in other scopes
+and to prevent name collisions that can occur especially when the main code includes multiple libraries.
+		
+2. Why are header files needed? Explain.
+We use header files for many advantages it bring to programming. Header files allow programmer to manage and organize their code by breaking it in smaller parts and
+save each parts it in seperate file. This way programmer can declare and define their functions in seperate file wich they can use these function in different
+projects just by including the header file in their main project file. So, using Header files is a good way to organize our code and prevent us from writing 
+similar codes multiple times for different project.
+
+3. In the instructions above, you were directed to compile only .cpp files but not the .h files. Explain why you should never compile header files.
+Header files are meant to hold the function declaration and we include them at the begining of our source file. When compiler compile the source file or any other .cpp
+file which we included the header file in, the compiler will read the function declaration from header file before it excutes the rest of the program and it 
+understands the functions that we use or call in our main .cpp file.
+
+4. Explain why you should never include .cpp files in another file.
+If we include a .cpp file in another file we might have a duplicate of our code in another file or have the same object and variable names that might conflict with 
+each other and results to failure of compilation of our program.
+
+
+5. Explain in your own words what have you learned on this workshop.
+I have learnt how the name space works and aslo how breaking the code in smaller parts and saves each part in a seperate file makes easier to for programmer to
+manage, organize and read and debuge the code.

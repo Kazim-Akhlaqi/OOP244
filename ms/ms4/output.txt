@@ -1,0 +1,28 @@
+Script started on Thu 02 Aug 2018 10:21:20 AM EDT
+]0;kakhlaqi@mtrx-node06pd:~/oop244/ms/ms4[?1034h[kakhlaqi@mtrx-node06pd ms4]$ ms4
+Linear: one two 
+As is: 
+one
+two
+
+Enter the following: 
+three<ENTER>
+four<ENTER>
+Ctrl^D<ENTER>
+
+three
+four
+one two three four 
+one
+two
+three
+four
+
+sku match
+Product < Perishable
+45|32|131|32
+113.5
+]0;kakhlaqi@mtrx-node06pd:~/oop244/ms/ms4[kakhlaqi@mtrx-node06pd ms4]$ exit
+exit
+
+Script done on Thu 02 Aug 2018 10:21:51 AM EDT

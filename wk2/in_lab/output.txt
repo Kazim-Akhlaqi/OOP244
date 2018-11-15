@@ -1,0 +1,24 @@
+Script started on Thu 24 May 2018 03:55:25 PM EDT
+]0;kakhlaqi@mtrx-node03pd:~/oop244/wk2/in_lab[?1034h[kakhlaqi@mtrx-node03pd in_lab]$ ws
+==========
+Input data
+==========
+Enter the number of Kingdoms: 2
+Kingdom #1: 
+Enter the name of the Kingdom: The_Vale
+Enter the number of people living in The_Vale: 234567
+Kingdom #2: 
+Enter the name of the Kingdom: The_Reach
+Enter the number of people living in The_Reach: 567890
+==========
+
+------------------------------
+The 1st kingdom entered is
+------------------------------
+The_Vale, population 234567
+------------------------------
+
+]0;kakhlaqi@mtrx-node03pd:~/oop244/wk2/in_lab[kakhlaqi@mtrx-node03pd in_lab]$ ex[Kit
+exit
+
+Script done on Thu 24 May 2018 03:56:39 PM EDT

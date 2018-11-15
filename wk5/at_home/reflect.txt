@@ -1,0 +1,15 @@
+--------------------
+Student Full_Name: Kazim Akhlaqi
+Student_ID: 103638177
+Stdent Email: kakhlaqi@myseneca.ca
+Section: OOP244-SAB
+Assignment: Workshop 5 - at_home - reflect.txt
+-------------------
+1. List the temporary objects in the tester module.
+   a,b,c,d,e
+
+2. Explain what you have learned in this workshop.
+   I have learnt how to overload an operator as a member function of a class type
+   and also how to access the current object from within a member function and 
+   identify the lifetime of an object, including a temporary object.
+

@@ -1,0 +1,16 @@
+/**********************************************************
+// OOP244 Workshop 6: Class With Resource
+// file reflect.txt
+// Version: at_home
+// Date July/9/2018
+// Student: Kazim Akhlaqi
+// Student_ID: 103638177
+// Student_Email: kakhlaqi@myseneca.ca
+// Section: OOP244 SAB
+// Description:
+***********************************************************/
+
+1 -  I learn how to define a copy constructor, and assignment operator. I also
+learn how to destruct a constructor and avoid code duplication in by using
+special member function.
+	

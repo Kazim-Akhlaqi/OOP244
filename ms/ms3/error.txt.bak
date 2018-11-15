@@ -1,0 +1,28 @@
+Product.cpp: In constructor ‘AMA::Product::Product(const char*, const char*, const char*, int, bool, double, int)’:
+Product.cpp:104:3: error: ‘_ProductSalePricePerUnit’ was not declared in this scope
+   _ProductSalePricePerUnit = ProductSalePricePerUnit;
+   ^
+Product.cpp: In member function ‘AMA::Product& AMA::Product::operator=(const AMA::Product&)’:
+Product.cpp:147:4: error: ‘_ProductSalePricePerUnit’ was not declared in this scope
+    _ProductSalePricePerUnit = object._ProductSalePricePerUnit;
+    ^
+Product.cpp:147:38: error: ‘const class AMA::Product’ has no member named ‘_ProductSalePricePerUnit’
+    _ProductSalePricePerUnit = object._ProductSalePricePerUnit;
+                                      ^
+Product.cpp: In member function ‘std::fstream& AMA::Product::load(std::fstream&)’:
+Product.cpp:179:11: error: no matching function for call to ‘AMA::Product::Product()’
+   Product temp;
+           ^
+Product.cpp:179:11: note: candidates are:
+Product.cpp:108:2: note: AMA::Product::Product(const AMA::Product&)
+  Product::Product(const Product& object) {
+  ^
+Product.cpp:108:2: note:   candidate expects 1 argument, 0 provided
+Product.cpp:93:2: note: AMA::Product::Product(const char*, const char*, const char*, int, bool, double, int)
+  Product::Product(const char* productSku, const char* productName, const char * productUnit, int productQtyInStock, bool productTaxable, double ProductSalePricePerUnit, int productQtyInNeed) {
+  ^
+Product.cpp:93:2: note:   candidate expects 7 arguments, 0 provided
+Product.cpp:82:2: note: AMA::Product::Product(char)
+  Product::Product(char productType) {
+  ^
+Product.cpp:82:2: note:   candidate expects 1 argument, 0 provided

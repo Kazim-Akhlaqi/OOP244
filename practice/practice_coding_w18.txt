@@ -1,0 +1,128 @@
+
+Exercises on Object-Oriented Programming and Dynamic Memory Allocation
+ 
+1. Write a class called Apartment  that  simulates  the  income available from
+an apartment building.  An  Apartment object stores the number of units and the 
+monthly rent(double) for  each  unit  in the building. 
+
+When instantiated, an apartment may be supplied with the name of the building 
+and the  number of units in the building. If the  number  of  units  is  
+not supplied, then 50 units are to be assumed. The default value of name
+is nullptr.
+
+Regardless of the number of units, each unit should be  initialized  to  
+have $500 monthly rent. The number of  units  should be  limited only by 
+available memory, not by some arbitrary maximum size (i.e. use dynamic memory allocation). 
+
+Here is the constructor: 
+   Apartment(const char *s=nullptr, int n=50); 
+
+Here are the public member functions:
+   void set(const char *s, int n) - initializes the name of the building to s 
+			      and the number of units to n. 
+
+   void set(int unit, double rent) - changes the  rent  for unit "unit"            
+       (where 0  is  the  first  one,  1  is  the second, and so on) 
+       to be "rent" dollars. If "unit" is not within in the range,  
+       considering  the  actual size  of  the building, then nothing is changed. 
+
+   void increase(double percent) - increases  the  rent  for all  units  by 
+		"percent"  percent.  For  example,  if "percent" is 7.5, the  rent 
+		for  each  unit  will  be raised  by  7.5%. 
+		(Note  that  the  percent  may   be negative, even though the owners 
+		 never plan  to  use that feature). 
+   double rent(int k) const - returns a copy of the  rent  for unit "k" 
+	      (where 0  is  the  first  one,  1  is  the second, and  so  on). 
+	      If  "k"  is  not  in  range, considering the actual size of the building, 
+	      then zero is returned. 
+
+   double rent() const - returns the total monthly rental  income for the entire building. 
+   Furthermore, the apartments may be  copied  (e.g.  in  parameter passing or using the 
+   operator =)  without  causing  memory allocation problems (i.e. You need to write 
+   a  proper  copy constructor and a proper assignment operator). 
+   You must also code the destructor to avoid memory leaks.
+
+   The following fragment of code shows some ways you might use the class Apartment: 
+
+	      Apartment fifty, onetwenty("Seneca", 120);
+
+	      for (int i = 80; i < 115; i++) 
+		  onetwenty.set(i, 1000);       // some units are $1000 
+	   
+	      fifty.set(70, 400);               // invalid unit - nothing changed 
+	   
+	      cout << onetwenty.rent() << '\n'; // rent collected for the whole building 
+
+	      cout << fifty.rent(40) << ',' << fifty.rent() << '\n'; 
+	      
+						// the line above should show 500,25000 
+
+2.  Code a  C++ class  called  a  pile,  which  stores  a  pile  of 
+    integers. A  pile  has  the  following  publicly  accessible 
+    characteristics: 
+
+		- When instantiated, a pile is passed the maximum number 
+		  of integers that  it  can  store.  (This  is  used  to 
+		  dynamically allocate an array of integers to store the numbers). 
+
+		- When destroyed, any memory  dynamically  allocated  to 
+		  the pile is deallocated. 
+
+		- The << operator can be used with a pile  on  the  left 
+		  side and an integer on the right. The integer is added 
+		  to the end of the pile, unless  the  pile  is  already 
+		  full, in which case the number is ignored. (When first 
+		  created, a pile starts out empty). Note: This is not the
+		  ostream operator <<.
+
+		- The << operator can be used with a pile on the left side 
+		  and a character on the right. The numbers stored in the 
+		  pile are displayed on the screen with a comma separating 
+		  each number from the next. The character will then be 
+		  displayed at the current line. Note: This is not the
+		  ostrewam operator <<.
+
+		- There is a member function 
+		    int length() const
+		  which returns the number of numbers currently  in  the 
+		  pile. (A new pile starts out  with  length  zero.  The 
+		  maximum for the length will be  the  number  specified 
+		  when the pile was created). 
+
+     In addition, overload the ostream insertion operator (<<). It is used to
+     display information about the pile. Please see the sample output for details.
+     
+	    For example, 
+
+		int main() 
+		{ 
+		    pile x(5); 
+
+		    x << 1; 
+		    x << 3; 
+		    x << -1; 
+		    x << 99; 
+		    x << x.length(); // This should put 4 on the pile 
+		    x << 10;         // ignored, since the pile is full 
+		    
+		    cout << "The pile is "; 
+		    x << '?'; 
+		    
+		    cout << "...more" << endl;
+		    cout << x;
+		    return 0; 
+		} 
+
+		SAMPLE OUTPUT:
+	    
+		The pile is 1, 3, -1, 99, 4? 
+		...more
+		maximum size: 5, length: 5
+		numbers: 1, 3, -1, 99, 4
+  
+
+
+
+
+
+

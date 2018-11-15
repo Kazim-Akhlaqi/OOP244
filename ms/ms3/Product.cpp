@@ -1,0 +1,354 @@
+﻿// OOP244 Final Project Milestone 3
+// file Product.cpp
+// Version: 1.0
+// Date July/24/2018
+// Student: Kazim Akhlaqi
+// Student_ID: 103638177
+// Student_Email: kakhlaqi@myseneca.ca
+// Section: OOP244 SAB
+// Description
+// Revision History
+// -----------------------------------------------------------
+// Name               Date                 Reason
+/////////////////////////////////////////////////////////////////
+#include <iostream>
+#include <string.h>
+#include <fstream>
+#include <iomanip>
+#include "Product.h"
+#include "ErrorState.h"
+
+using namespace std;
+using namespace AMA;
+
+namespace AMA {
+
+	// Protected member functions definition:
+
+	void Product::name(const char *productName) {
+		int productNameLength = strlen(productName);
+		if (productName != nullptr) {
+			_productName = new char[productNameLength];
+			for (int i = 0; i < productNameLength; i++) {
+				_productName[i] = productName[i];
+			}
+			_productName[productNameLength] = '\0';
+		}
+	}
+
+	const char *Product::name() const {
+		if (_productName[0] == '\0') {
+			return nullptr;
+		}
+		else
+			return _productName;
+	}
+
+	const char *Product::sku() const {
+		return _productSku;
+	}
+
+	const char *Product::unit() const {
+		return _productUnit;
+	}
+
+	bool Product::taxed() const {
+		return _productTaxable;
+	}
+
+	double Product::price() const {
+		return _productSalePricePerUnit;
+	}
+
+	double Product::cost() const {
+		if (_productTaxable) {
+			return price() * (TAX_RATE + 1);
+		}
+		else
+			return price();
+	}
+
+	void Product::message(const char *errorMessage) {
+		_productErrorState.message(errorMessage);
+	}
+
+	bool Product::isClear() const {
+		return _productErrorState.isClear();
+	}
+
+	// Public member functions definition:
+
+	Product::Product(char productType = 'N') {
+		_productType = productType;
+		_productSku[0] = '\0';
+		_productUnit[0] = '\0';
+		_productName = nullptr;
+		_productQtyInStock = 0;
+		_productQtyInNeed = 0;
+		_productSalePricePerUnit = 0.0;
+		_productTaxable = true;
+	}
+
+	Product::Product(const char* productSku, const char* productName, const char * productUnit, int productQtyInStock, bool productTaxable, double productSalePricePerUnit, int productQtyInNeed) {
+		name(productName);
+
+		strncpy(_productSku, productSku, SKU_MAX_CHAR);
+		_productSku[SKU_MAX_CHAR] = '\0';
+
+		strncpy(_productUnit, productUnit, UNIT_MAX_CHAR);
+		_productUnit[UNIT_MAX_CHAR] = '\0';
+
+		_productQtyInStock = productQtyInStock;
+		_productQtyInNeed = productQtyInNeed;
+		_productSalePricePerUnit = productSalePricePerUnit;
+		_productTaxable = productTaxable;
+	}
+
+	Product::Product(const Product& object) {
+
+		_productType = object._productType;
+
+		strncpy(_productSku, object._productSku, SKU_MAX_CHAR);
+		_productSku[SKU_MAX_CHAR] = '\0';
+
+		strncpy(_productUnit, object._productUnit, UNIT_MAX_CHAR);
+		_productUnit[UNIT_MAX_CHAR] = '\0';
+
+		_productQtyInStock = object._productQtyInStock;
+		_productQtyInNeed = object._productQtyInNeed;
+		_productTaxable = object._productTaxable;
+		_productSalePricePerUnit = object._productSalePricePerUnit;
+		
+		int productNameLength = strlen(object._productName);
+
+		if (object._productName != nullptr) {
+			_productName = nullptr;
+			_productName = new char[productNameLength];
+
+			for (int i = 0; i < productNameLength; i++) {
+				_productName[i] = object._productName[i];
+			}
+			_productName[productNameLength] = '\0';
+		}
+		else
+			_productName = nullptr;
+	}
+
+	Product &Product::operator=(const Product &object) {
+		if (this != &object) {
+			_productType = object._productType;
+
+			strncpy(_productSku, object.sku(), SKU_MAX_CHAR);
+			_productSku[SKU_MAX_CHAR] = '\0';
+
+			strncpy(_productUnit, object.unit(), UNIT_MAX_CHAR);
+			_productUnit[UNIT_MAX_CHAR] = '\0';
+
+			_productQtyInStock = object._productQtyInStock;
+			_productQtyInNeed = object._productQtyInNeed;
+			_productTaxable = object._productTaxable;
+			_productSalePricePerUnit = object._productSalePricePerUnit;
+			
+			delete[] _productName;
+			if (object._productName != nullptr) {
+				int productNameLength = strlen(object._productName);
+				_productName = new char[productNameLength];
+				for (int i = 0; i < productNameLength; i++) {
+					_productName[i] = object._productName[i];
+				}
+				_productName[productNameLength] = '\0';
+			} else
+				_productName = nullptr;
+		}
+		return *this;
+	}
+
+	Product::~Product() {
+		delete[] _productName;
+	}
+
+	std::fstream &Product::store(std::fstream &file, bool newLine) const {
+		file << _productType << ',' << _productSku << ',' 
+			 << _productUnit << ',' << _productQtyInStock << ',' 
+			 << _productQtyInStock << "," << _productTaxable << "," 
+			 << _productSalePricePerUnit << "," << _productQtyInNeed;
+		if (newLine) {
+			file << endl;
+		}
+		return file;
+	}
+
+	std::fstream &Product::load(std::fstream &file){
+
+		Product tempObject;
+
+		tempObject._productName = new char[USER_NAME_MAX_CHAR + 1];
+
+		if (file.is_open()) {
+			file >> tempObject._productType >> tempObject._productSku 
+				 >> tempObject._productUnit >> tempObject._productQtyInStock 
+				 >> tempObject._productQtyInStock >> tempObject._productTaxable 
+				 >> tempObject._productSalePricePerUnit >> tempObject._productQtyInNeed;
+			*this = tempObject;
+		}
+
+		delete[] tempObject._productName;
+		tempObject._productName = nullptr;
+
+		return file;
+	}
+
+	std::ostream &Product::write(std::ostream& os, bool linear) const {
+		if (linear) {
+
+			os << setw(SKU_MAX_CHAR) << left << _productSku << '|'
+			   << setw(20) << left << _productName << '|'
+			   << setw(7) << right << fixed << setprecision(2) << cost() << '|'
+			   << setw(4) << right << _productQtyInStock << '|'
+			   << setw(10) << left << _productUnit << '|'
+			   << setw(4) << right << _productQtyInNeed << '|';
+		} else {
+			os << "Sku: " << _productSku << "|" << endl
+			   << "Name: " << _productName << "|" << endl
+			   << "Price: " << _productSalePricePerUnit << "|" << endl;
+			if (_productTaxable){
+				os << "Price after tax: " << cost() << "|" << endl;
+			} else {
+				os << "N/A" << "|" << endl;
+			}
+			os << "Quantity On hand: " << _productQtyInStock << "|" << endl
+			   << "Quantity needeed: " << _productQtyInNeed << "|" << endl;
+		}
+		return os;
+	}
+
+	std::istream &Product::read(std::istream& is) {
+		char tax;
+		char productSku[SKU_MAX_CHAR + 1];
+		char productUnit[USER_NAME_MAX_CHAR + 1];
+		char *productName = new char[USER_NAME_MAX_CHAR + 1];
+		int productQtyInStock;
+		int productQtyInNeed;
+		double productSalePricePerUnit;
+		bool productTaxable;
+		ErrorState errorMessage;
+
+		cout << " Sku: "; is >> productSku;
+		cout << " Name (no spaces): "; is >> productName;
+		cout << " Unit: "; is >> productUnit;
+		cout << " Taxed? (y/n): "; is >> tax;
+
+		if (tax == 'Y' || tax == 'y'){
+			productTaxable = true;
+		} else if (tax == 'N' || tax == 'n'){
+			productTaxable = false;
+		} else {
+			is.setstate(std::ios::failbit);
+			errorMessage.message("Only(Y)es or (N)o are acceptable");
+		}
+
+		if (!is.fail()) {
+			cout << " Price: "; is >> productSalePricePerUnit;
+			if (is.fail())
+				errorMessage.message("Invalid Price Entry");
+		}
+
+		if (!is.fail()){
+			cout << " Quantity on hand: "; is >> productQtyInStock;
+			if (is.fail())
+				errorMessage.message("Invalid Quantity Entry");
+		}
+
+		if (!is.fail()){
+			cout << " Quantity needed: "; is >> productQtyInNeed;
+			if (is.fail())
+				errorMessage.message("Invalid Quantity Needed Entry");
+		}
+
+		if (!is.fail()){
+			Product tempObject = Product(productSku, productName, productUnit, productQtyInStock, productTaxable, productSalePricePerUnit, productQtyInNeed);
+			*this = tempObject;
+		}
+		delete[] productName;
+		productName = nullptr;
+
+		return is;
+	}
+
+	bool Product::operator==(const char *productSku) const {
+		bool isIdentical;
+		if (strcmp(productSku, this->_productSku) == 0){
+			isIdentical = true;
+		} else
+			isIdentical = false;
+
+		return isIdentical;
+	}
+
+	double Product::total_cost() const {
+		double productSalePricePerUnitTax = _productSalePricePerUnit * TAX_RATE;
+		double productSalePricePerUnitPlusTax = _productSalePricePerUnit + productSalePricePerUnitTax;
+		double productSalePriceTotal = static_cast<double>(_productQtyInStock * productSalePricePerUnitPlusTax);
+		return productSalePriceTotal;
+	}
+
+	void Product::quantity(int productUnits) {
+		_productQtyInStock = productUnits;
+	}
+
+	bool Product::isEmpty() const {
+		return (_productName == nullptr) ? true : false;
+	}
+
+	int Product::qtyNeeded() const {
+		return _productQtyInNeed;
+	}
+
+	int Product::quantity() const {
+		return _productQtyInStock;
+	}
+
+	bool Product::operator>(const char *productSku) const {
+		bool isGreater;
+		if (strcmp(_productSku, productSku) > 0){
+			isGreater = true;
+		} else
+			isGreater = false;
+
+		return isGreater;
+	}
+
+	bool Product::operator>(const Product& productName) const {
+		bool isGreater;
+		if (strcmp(_productName, productName._productName) > 0){
+			isGreater = true;
+		} else
+			isGreater = false;
+
+		return isGreater;
+	}
+	
+	int Product::operator+=(int unitsAdded){
+		if (unitsAdded > 0) {
+			_productQtyInStock += unitsAdded;
+			return _productQtyInStock;
+		} else
+			return _productQtyInStock;
+	}
+
+	// helper functions definition
+
+	std::ostream &operator<<(std::ostream& os, const Product& object) {
+		return object.write(os, true);
+	}
+
+	std::istream &operator>>(std::istream& is, Product& object) {
+		object.read(is);
+		return is;
+	}
+
+	double operator+=(double& cost, const Product& object){ 
+		double totalCost = cost + object.total_cost();
+		return totalCost;
+	}
+}

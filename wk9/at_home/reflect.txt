@@ -1,0 +1,51 @@
+/**********************************************************
+// OOP244 Workshop 9: Function Templates
+// File: reflect.txt
+// Version: at_home
+// Date July/30/2018
+// Student: Kazim Akhlaqi
+// Student_ID: 103638177
+// Student_Email: kakhlaqi@myseneca.ca
+// Section: OOP244 SAB
+// Description:
+***********************************************************/
+
+1. What happens if you try to put your templated functions in Data.cpp?
+Does your source code compile if you move all functions to Data.h? Explain.
+neighter of the two experiment worked when I moved all the templated funtions to
+Data.cpp or to data.h. however if only we move those templated function that are
+invoked in data.cpp from data.h like min, max, sum and average and place them before
+sict namespace in data.cpp they will work.
+
+2. Move one templated function into ws9_lab.cpp. Does it work now?
+Do you need to define the template function above main(),
+before it is used, or can you define it below main()?
+
+we can move any templated function to w9_lab.cpp file before main()
+as long as the templated function is invoked in this module. for example
+if we move readrow() and display() before main() the program still works
+beacuse these functions are invoked in main(). It is as we declare and define
+a function before main.
+
+
+3. Could you have done this lab without templates, by just overloading
+your functions in Data.h to accept integer and double arguments?
+What is the advantage of using templates?
+
+Yes, this lab could be done without using templates just by overloading
+funtion in data.h but by using the template we can reuse the code and aviod
+code repeatition which results in reducing the size of the program which it
+results in program proformance
+
+4.      Are the following equivalent?
+template<class T>
+template<typename T>
+
+Yes, They're equivalent and interchangeable for most of the times.
+both indicate that the name following represents a parameterized type placeholder
+that will be replaced by a c/c++ predefined or user defined type.
+
+******************************
+quiz reflection:
+I have not recieved my quiz papar for week 10 yet. I will answer the quiz in next
+assignment sumbimssion if I had any mistake.
